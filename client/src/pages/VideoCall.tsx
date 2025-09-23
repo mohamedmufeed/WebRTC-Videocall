@@ -1,34 +1,29 @@
-import {  Mic, Video, Phone, MessageCircle,ScreenShare} from "lucide-react";
+import { Mic, Video, Phone, MessageCircle, ScreenShare } from "lucide-react";
+import Videos from "../components/Videos";
+import { useParams } from "react-router-dom";
 
 const VideoCall = () => {
-    const meetingTitle = "Meeting Room - ABC123"; // later you can replace with roomId from params
+    const {roomId}=useParams()
+    const meetingTitle = "Meeting Room - ABC123";
 
     return (
         <div className="min-h-screen bg-[#695ca8] flex flex-col lg:flex-row">
-            
+
             {/* Left (Videos + Controls) */}
             <div className="flex-1 flex flex-col p-6 gap-4">
-                
+
                 {/* Heading */}
                 <div className="flex justify-between items-center mb-4">
                     <h1 className="text-2xl font-bold text-white">
                         {meetingTitle}
                     </h1>
-                    <span className="text-sm text-gray-200">00:25:32</span> 
+                    <span className="text-sm text-gray-200">00:25:32</span>
                     {/* You can replace this with a live meeting timer */}
                 </div>
 
                 {/* Videos */}
-                <div className="flex flex-col sm:flex-row gap-6 flex-1 justify-center">
-                    <video
-                        className="flex-1 rounded-lg border-2 border-white bg-black"
-                        autoPlay
-                        muted
-                    />
-                    <video
-                        className="flex-1 rounded-lg border-2 border-white bg-black"
-                        autoPlay
-                    />
+               <div className="flex flex-col sm:flex-row gap-6 flex-1 justify-center h-full">
+                    <Videos roomId={roomId!}/>
                 </div>
 
                 {/* Controls */}
