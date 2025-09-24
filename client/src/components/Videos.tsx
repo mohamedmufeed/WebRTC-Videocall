@@ -9,8 +9,8 @@ interface Props {
         toggleMic: (on: boolean) => void;
         toggleVideo: (on: boolean) => void;
         endCall: () => void;
-        startShareScreen:()=>void;
-        stopShareScreen:()=>void;
+        startShareScreen: () => void;
+        stopShareScreen: () => void;
     }) => void;
     PassConnectionStatus: (connectionStatus: string) => void
     socket: Socket | null
@@ -193,7 +193,7 @@ const Videos: React.FC<Props> = ({ roomId, setControls, socket, PassConnectionSt
     }
 
     useEffect(() => {
-        setControls({ toggleMic, toggleVideo, endCall  ,startShareScreen , stopShareScreen});
+        setControls({ toggleMic, toggleVideo, endCall, startShareScreen, stopShareScreen });
         PassConnectionStatus(connectionStatus)
     }, [connectionStatus]);
 
@@ -212,6 +212,14 @@ const Videos: React.FC<Props> = ({ roomId, setControls, socket, PassConnectionSt
 
     const stopShareScreen = async () => {
         try {
+
+            if (localVideoRef.current?.srcObject instanceof MediaStream) {
+                localVideoRef.current.srcObject.getTracks().forEach(t => {
+                    if (t.kind === "video" || t.label.includes("Screen")) {
+                        t.stop()
+                    }
+                })
+            }
             const localStream = localStreamRef.current
             if (!localStream) return
             const videoTrack = localStream.getVideoTracks()[0]
