@@ -226,7 +226,7 @@ const Videos: React.FC<Props> = ({ roomId, setControls, socket, PassConnectionSt
     return (
         <div className="flex flex-col sm:flex-row gap-6 flex-1 justify-center h-full">
             <audio ref={remoteAudioRef} autoPlay style={{ display: 'none' }} />
-            <div className="flex-1 h-96 sm:h-11/12 relative">
+            <div className="flex-1 h-96 sm:h-11/12 relative border-2 border-white/30 rounded-lg">
                 <video ref={localVideoRef}className="w-full h-full rounded-lg bg-black object-cover"
                     autoPlay
                     muted
@@ -236,8 +236,8 @@ const Videos: React.FC<Props> = ({ roomId, setControls, socket, PassConnectionSt
                 <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">Local Video</div>
             </div>
 
-            <div className="flex-1 h-96 sm:h-11/12 relative">
-                <video ref={remoteVideoRef} className="w-full h-full rounded-lg bg-black object-cover"
+            <div className="flex-1 h-96 sm:h-11/12 relative border-2 border-white/30 rounded-lg">
+                <video ref={remoteVideoRef} className="w-full h-full rounded-lg bg-black object-cover border-2 border-white/10"
                     autoPlay
                     playsInline
                     muted={false}

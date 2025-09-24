@@ -18,7 +18,7 @@ const VideoCall = () => {
     const [status, setStatus] = useState("")
     const [micOn, setMicOn] = useState(true);
     const [camOn, setCamOn] = useState(true);
-    const socket = useSocket("http://localhost:5001");
+    const socket = useSocket(import.meta.env.VITE_API_URL);
     const userId = "user-" + Math.floor(Math.random() * 1000);
     const [showChat, setShowChat] = useState(true)
     const [startSharing, setStartSharing] = useState(false)
