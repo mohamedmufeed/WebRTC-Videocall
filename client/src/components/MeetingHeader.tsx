@@ -72,7 +72,7 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId, status }) => {
                         ) : (
                             <>
                                 <Copy className="w-4 h-4 text-white group-hover:text-white/90" />
-                                <span className="text-sm text-white group-hover:text-white/90 font-medium hidden sm:inline">
+                                <span className="text-sm text-white group-hover:text-white/90 font-medium hidden sm:inline cursor-copy">
                                     Copy Link
                                 </span>
                             </>

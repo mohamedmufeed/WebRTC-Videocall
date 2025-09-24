@@ -5,13 +5,7 @@ import type { Socket } from "socket.io-client";
 
 interface Props {
     roomId: string
-    setControls: (controls: {
-        toggleMic: (on: boolean) => void;
-        toggleVideo: (on: boolean) => void;
-        endCall: () => void;
-        startShareScreen: () => void;
-        stopShareScreen: () => void;
-    }) => void;
+    setControls: (controls: { toggleMic: (on: boolean) => void; toggleVideo: (on: boolean) => void; endCall: () => void;startShareScreen: () => void; stopShareScreen: () => void;}) => void;
     PassConnectionStatus: (connectionStatus: string) => void
     socket: Socket | null
 }
@@ -28,7 +22,6 @@ const Videos: React.FC<Props> = ({ roomId, setControls, socket, PassConnectionSt
 
     useEffect(() => {
         if (!socket) return
-
         const pc = new RTCPeerConnection({
             iceServers: [
                 { urls: 'stun:stun.l.google.com:19302' },
@@ -181,8 +174,8 @@ const Videos: React.FC<Props> = ({ roomId, setControls, socket, PassConnectionSt
     const toggleVideo = (enabled: boolean) => {
         if (!localStreamRef.current) return
         localStreamRef.current.getVideoTracks().forEach(track => track.enabled = enabled)
-    }
-
+    } 
+    
     const endCall = () => {
         if (pcRef.current && pcRef.current.connectionState !== 'closed') pcRef.current.close()
         if (localStreamRef.current) localStreamRef.current.getTracks().forEach(track => track.stop())
@@ -234,35 +227,26 @@ const Videos: React.FC<Props> = ({ roomId, setControls, socket, PassConnectionSt
         <div className="flex flex-col sm:flex-row gap-6 flex-1 justify-center h-full">
             <audio ref={remoteAudioRef} autoPlay style={{ display: 'none' }} />
             <div className="flex-1 h-96 sm:h-11/12 relative">
-                <video
-                    ref={localVideoRef}
-                    className="w-full h-full rounded-lg bg-black object-cover"
+                <video ref={localVideoRef}className="w-full h-full rounded-lg bg-black object-cover"
                     autoPlay
                     muted
                     playsInline
                     style={{ transform: "scaleX(-1)" }}
                 />
-                <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                    Local Video
-                </div>
+                <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">Local Video</div>
             </div>
 
             <div className="flex-1 h-96 sm:h-11/12 relative">
-                <video
-                    ref={remoteVideoRef}
-                    className="w-full h-full rounded-lg bg-black object-cover"
+                <video ref={remoteVideoRef} className="w-full h-full rounded-lg bg-black object-cover"
                     autoPlay
                     playsInline
                     muted={false}
                     controls={false}
                     style={{ transform: "scaleX(-1)" }}
                 />
-                <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                    Remote Video
-                </div>
+                <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded"> Remote Video</div>
             </div>
         </div>
     )
 }
-
 export default Videos

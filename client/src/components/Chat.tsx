@@ -85,8 +85,9 @@ const Chat: React.FC<Props> = ({ roomId, userId, socket }) => {
                     onKeyDown={e => e.key === "Enter" && sendMessage()}
                 />
                 <button
+                    disabled={!input}
                     onClick={sendMessage}
-                    className="bg-white text-black px-5 py-2 rounded-xl hover:bg-gray-200 transition">
+                    className={`${input ? "bg-white cursor-pointer": "bg-gray-200 cursor-not-allowed"}  text-black px-5 py-2 rounded-xl hover:bg-gray-200 transition`}>
                     Send
                 </button>
             </div>

@@ -1,10 +1,13 @@
+import { Video } from "lucide-react";
+
 const Navbar = () => {
     return (
-        <header className="p-5 sm:p-10  w-full">
-            <h1 className="font-bold text-xl sm:text-2xl text-center sm:text-left">
-                Insights
-            </h1>
-        </header>
+        <nav className="py-6">
+            <div className="text-2xl font-bold text-white flex items-center gap-2">
+                <span className="text-center flex justify-center items-center"><Video  size={35}/></span>
+                VideoCall
+            </div>
+        </nav>
     );
 };
 
