@@ -1,12 +1,12 @@
 import type React from "react";
-import { useSocket } from "../hooks/useSocket";
 import { useEffect, useState } from "react";
 import type { Socket } from "socket.io-client";
 
 interface Props {
     roomId: string;
     userId: string;
-    socket:Socket|null
+    socket:Socket | null
+
 }
 
 interface Message {
@@ -41,7 +41,7 @@ const Chat: React.FC<Props> = ({ roomId, userId , socket }) => {
             timestamp: Date.now(),
         };
         setMessages(prev => [...prev, msg]);
-        socket.emit("send-message", msg);
+        socket.emit("send-message", {roomId,msg});
         setInput("");
 
     }
@@ -64,11 +64,10 @@ const Chat: React.FC<Props> = ({ roomId, userId , socket }) => {
                     ))
                 ) :
                     (
-                    <p className="text-gray-500 text-center">No Messages</p>
+                        <p className="text-gray-500 text-center">No Messages</p>
                     )}
             </div>
 
-            {/* Input */}
             <div className="mt-4 flex gap-2">
                 <input
                     value={input}

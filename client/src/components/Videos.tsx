@@ -1,6 +1,7 @@
 import type React from "react"
 import { useEffect, useRef } from "react"
-import { useSocket } from "../hooks/useSocket"
+import { useNavigate } from "react-router-dom";
+import type { Socket } from "socket.io-client";
 
 interface Props {
     roomId: string
@@ -9,16 +10,17 @@ interface Props {
         toggleVideo: (on: boolean) => void;
         endCall: () => void;
     }) => void;
+    socket:Socket| null
 }
 
-const Videos: React.FC<Props> = ({ roomId, setControls }) => {
+const Videos: React.FC<Props> = ({ roomId, setControls  , socket}) => {
     const localVideoRef = useRef<HTMLVideoElement | null>(null)
     const remoteVideoRef = useRef<HTMLVideoElement | null>(null)
     const remoteAudioRef = useRef<HTMLAudioElement | null>(null)
     const pcRef = useRef<RTCPeerConnection | null>(null);
-    const socket = useSocket("http://localhost:5001");
     const localStreamRef = useRef<MediaStream | null>(null);
     const remoteSocketIdRef = useRef<string | null>(null);
+    const navigate=useNavigate()
 
     useEffect(() => {
         if (!socket) return
@@ -169,6 +171,7 @@ const Videos: React.FC<Props> = ({ roomId, setControls }) => {
         if (localVideoRef.current) localVideoRef.current.srcObject = null
         if (remoteVideoRef.current) remoteVideoRef.current.srcObject = null
         if (socket) socket.emit("leave-room", roomId)
+            navigate("/")
     }
 
     useEffect(() => {
