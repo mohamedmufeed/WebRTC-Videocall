@@ -37,9 +37,7 @@ const Home = () => {
 
                             <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight py-10">
                                 Premium video meetings.{" "}
-                            
                                     Now for everyone.
-                        
                             </h1>
 
                             <p className="text-base text-white leading-relaxed">
@@ -69,7 +67,7 @@ const Home = () => {
                                 <div className="relative flex-1">
                                     <input
                                         type="text"
-                                        placeholder="Enter meeting code"
+                                        placeholder="Enter Meeting Link"
                                         value={roomId}
                                         onChange={(e) => setRoomId(e.target.value)}
                                         className="w-full border-2 text-white border-white rounded-xl px-6 py-3 text-lg focus:outline-none transition-colors duration-200"

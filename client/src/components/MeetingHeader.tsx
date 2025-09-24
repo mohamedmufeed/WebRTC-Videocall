@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 
 interface MeetingHeaderProps {
     roomId: string;
+    status: string;
 
 }
 
-const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId }) => {
+const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId, status }) => {
     const [copied, setCopied] = useState(false);
     const [duration, setDuration] = useState("00:00:00");
 
@@ -36,14 +37,7 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId }) => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
-            const textArea = document.createElement('textarea');
-            textArea.value = `${window.location.origin}/call/${roomId}`;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
+            console.error("Failed to copy :", err)
         }
     };
 
@@ -87,12 +81,29 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId }) => {
                 </div>
             </div>
 
-            <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-3 py-2">
-                <Clock className="text-white w-4 h-4" />
-                <span className="text-sm text-white font-mono font-medium">
-                    {duration}
-                </span>
+            <div className=" items-center ">
+                <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-3 py-2">
+                    <Clock className="text-white w-4 h-4" />
+                    <span className="text-sm text-white font-mono font-medium">
+                        {duration}
+                    </span>
+                </div>
+                <div className="flex items-center justify-center space-x-2 mt-2">
+                    <span
+                        className={`w-3 h-3 rounded-full ${status === "Connected"
+                            ? "bg-green-500"
+                            : status === "Connecting..."
+                                ? "bg-amber-500"
+                                : "bg-red-500"
+                            }`}
+                    ></span>
+                    <span className="text-sm text-white">
+                        {status}
+                    </span>
+                </div>
+
             </div>
+
         </div>
     );
 };

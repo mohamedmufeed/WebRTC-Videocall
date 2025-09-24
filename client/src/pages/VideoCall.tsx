@@ -13,6 +13,7 @@ const VideoCall = () => {
         toggleVideo: (on: boolean) => void;
         endCall: () => void;
     } | null>(null);
+    const [status,setStatus]=useState("")
     const [micOn, setMicOn] = useState(true);
     const [camOn, setCamOn] = useState(true);
     const socket = useSocket("http://localhost:5001");
@@ -26,11 +27,11 @@ const VideoCall = () => {
             <div className="flex-1 flex flex-col p-6 gap-4">
 
                 {/* Meeting Heading */}
-                <MeetingHeader roomId={roomId!}/>
+                <MeetingHeader roomId={roomId!} status={status}/>
 
                 {/* Video Section */}
                 <div className="flex flex-col sm:flex-row gap-6 flex-1 justify-center h-full">
-                    <Videos roomId={roomId!} setControls={setControls} socket={socket} />
+                    <Videos roomId={roomId!} setControls={setControls} PassConnectionStatus={setStatus} socket={socket} />
                 </div>
 
                 {/* Controls */}

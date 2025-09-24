@@ -5,7 +5,7 @@ import type { Socket } from "socket.io-client";
 interface Props {
     roomId: string;
     userId: string;
-    socket:Socket | null
+    socket: Socket | null
 
 }
 
@@ -15,7 +15,7 @@ interface Message {
     timestamp: number
 }
 
-const Chat: React.FC<Props> = ({ roomId, userId , socket }) => {
+const Chat: React.FC<Props> = ({ roomId, userId, socket }) => {
 
     const [messages, setMessages] = useState<Message[]>([])
     const [input, setInput] = useState("")
@@ -41,12 +41,12 @@ const Chat: React.FC<Props> = ({ roomId, userId , socket }) => {
             timestamp: Date.now(),
         };
         setMessages(prev => [...prev, msg]);
-        socket.emit("send-message", {roomId,msg});
+        socket.emit("send-message", { roomId, msg });
         setInput("");
 
     }
     return (
-        <div className="w-full lg:w-1/3 bg-white/50 p-6 flex flex-col  rounded-lg shadow-inner">
+        <div className="w-full lg:w-1/3 bg-white/60 p-6 flex flex-col  rounded-lg shadow-inner">
             {/* Chat Heading */}
             <h2 className="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Chat</h2>
 
@@ -56,11 +56,18 @@ const Chat: React.FC<Props> = ({ roomId, userId , socket }) => {
                     messages.map((msg, idx) => (
                         <div
                             key={idx}
-                            className={`p-3 rounded-xl w-fit max-w-[80%] shadow-sm ${msg.userId === userId ? "bg-blue-200 self-end" : "bg-gray-100 self-start"
-                                }`}
+                            className={`flex w-full ${msg.userId === userId ? "justify-end" : "justify-start"}`}
                         >
-                            {msg.text}
+                            <div
+                                className={`p-3 rounded-xl w-fit max-w-[80%] shadow-sm ${msg.userId === userId
+                                        ? "bg-[#695ca8]/50 text-right"
+                                        : "bg-gray-100 text-left"
+                                    }`}
+                            >
+                                {msg.text}
+                            </div>
                         </div>
+
                     ))
                 ) :
                     (

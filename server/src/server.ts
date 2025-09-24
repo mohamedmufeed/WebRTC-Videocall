@@ -93,6 +93,13 @@ io.on("connection", (socket) => {
             }
         }
     })
+    socket.on("connect_error", (err) => {
+        console.error(`Connection error with socket ${socket.id}:`, err.message);
+    });
+
+    socket.on("reconnect_attempt", (attempt) => {
+        console.log(`User ${socket.id} is trying to reconnect (attempt ${attempt})`);
+    });
 })
 
 httpServer.listen(5001, () => {
