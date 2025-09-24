@@ -67,7 +67,7 @@ const Home = () => {
                                 <div className="flex-1 w-full relative">
                                     <input
                                         type="text"
-                                        placeholder="Enter Meeting Link"
+                                        placeholder="Enter Meeting Code"
                                         value={roomId}
                                         onChange={(e) => setRoomId(e.target.value)}
                                         className={`w-full border-2 text-white placeholder-white px-6 py-3 rounded-xl text-lg focus:outline-none transition-colors duration-200 ${error ? "border-red-300" : "border-white"
