@@ -30,7 +30,7 @@ client/
 ├── src/
 │ ├── assets/ # Images, icons
 │ ├── components/ # Reusable UI components
-│ ├── pages/ # App pages (Auth, Dashboard, etc.)
+│ ├── pages/ # App pages 
 │ ├── hooks/ # Custom React hooks
 │ ├── routes/ # App routes
 │ ├── utils/ # Utility functions
@@ -115,7 +115,7 @@ Open in browser: http://localhost:5173
 
 ### Hosted Links
 
-Frontend (Vercel): 
+Frontend (Vercel): https://videocall-coral.vercel.app/
 
 ### License
 
