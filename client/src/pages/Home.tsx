@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import { Video, Users, Shield } from "lucide-react";
 import VideocallInterface from "../components/VideocallInterface";
+import { generateRoomId } from "../utils/genrateRoomid";
 
 const Home = () => {
     const navigate = useNavigate();
     const [roomId, setRoomId] = useState("");
 
     const handleCreateMeeting = () => {
-        const newRoomId = uuidv4();
+        const newRoomId = generateRoomId();
         navigate(`/call/${newRoomId}`);
     };
 
