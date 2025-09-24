@@ -32,8 +32,7 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId, status }) => {
 
     const copyRoomId = async () => {
         try {
-            const meetingUrl = `${window.location.origin}/call/${roomId}`;
-            await navigator.clipboard.writeText(meetingUrl);
+            await navigator.clipboard.writeText(roomId);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
@@ -55,7 +54,7 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId, status }) => {
                             Room: {roomId}
                         </h1>
                         <span className="text-sm text-white/90">
-                            Share this link with participants
+                            Share this code with participants
                         </span>
                     </div>
 
@@ -73,7 +72,7 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({ roomId, status }) => {
                             <>
                                 <Copy className="w-4 h-4 text-white group-hover:text-white/90" />
                                 <span className="text-sm text-white group-hover:text-white/90 font-medium hidden sm:inline cursor-copy">
-                                    Copy Link
+                                    Copy Code
                                 </span>
                             </>
                         )}
